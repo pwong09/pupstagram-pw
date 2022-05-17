@@ -6,7 +6,7 @@ function setToken(token) {
     }
   }
   
-  function getToken() {
+function getToken() {
     let token = localStorage.getItem('token');
     if (token) {
       // Check if expired, remove if it is
@@ -21,16 +21,16 @@ function setToken(token) {
     return token;
   }
   
-  function getUserFromToken() {
+function getUserFromToken() {
     const token = getToken();
     return token ? JSON.parse(atob(token.split('.')[1])).user : null;
   }
   
-  function removeToken() {
+function removeToken() {
     localStorage.removeItem('token');
   }
   
-  export default {
+export default {
     setToken,
     getToken,
     removeToken,

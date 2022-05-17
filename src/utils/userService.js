@@ -3,11 +3,15 @@ import tokenService from './tokenService';
 const BASE_URL = '/api/users/';
 
 function signup(user) {
+  console.log('user keys', user.keys());
   return fetch(BASE_URL + 'signup', {
     method: 'POST',
-    headers: new Headers({'Content-Type': 'application/json'}),  // If you are sending a file/photo over
+    // browser will automatically detect our header with photo file
+    // headers: new Headers({'Content-Type': 'application/json'}),  // If you are sending a file/photo over
     // what do datatype do you need to change this too?
-    body: JSON.stringify(user)
+    // send over formData instead of json for images
+    // JSON.stringify(user) no need to stringify anymore
+    body: user // <-- contents of formData
   })
   .then(res => {
     if (res.ok) return res.json();
