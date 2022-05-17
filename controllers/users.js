@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Post = require('../models/post');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
@@ -9,7 +10,8 @@ const s3 = new S3();
 
 module.exports = {
   signup,
-  login
+  login,
+  profile
 };
 
 async function signup(req, res) {
@@ -62,6 +64,18 @@ async function login(req, res) {
     });
   } catch (err) {
     return res.status(401).json(err);
+  }
+}
+
+async function profile(req, res){
+  try {
+    const user = await User.findOne({username: req.params.username});
+    const posts = await Post.find({user: user._id});
+    console.log('profile function posts', posts);
+    res.status(200).json({posts: posts, user: user})
+  } catch(err) {
+    console.log(err)
+    res.send({err})
   }
 }
 

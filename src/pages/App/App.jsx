@@ -21,6 +21,7 @@ function App() {
         <Link to="/">Home</Link>
         <Link to="/signup">Signup</Link>
         <Link to="/login">Login</Link>
+        <Link to={`/${user.username}`}>Profile</Link>
       </nav>
       <main>
       <Routes>
