@@ -13,7 +13,7 @@ module.exports = {
 };
 
 async function signup(req, res) {
-  console.log('signup controller');
+  console.log('signup in controller/users');
   console.log(req.body, '^^ this is req.body');
   console.log('req.file here: ', req.file);
 

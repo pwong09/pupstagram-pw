@@ -5,6 +5,7 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from "../../utils/userService";
 import Feed from "../Feed/Feed";
+import ProfilePage from "../ProfilePage/ProfilePage";
 
 function App() {
   const [user, setUser] = useState(userService.getUser());
@@ -21,12 +22,14 @@ function App() {
         <Link to="/signup">Signup</Link>
         <Link to="/login">Login</Link>
       </nav>
+      <main>
       <Routes>
-          <Route path='/' element={<Feed />} />
+          <Route path='/' element={<Feed user={user}/>} />
           <Route path="/login" element={<LoginPage handleSignupOrLogin={handleSignupOrLogin} />} />
-          
           <Route exact path="/signup" element={<SignupPage handleSignupOrLogin={handleSignupOrLogin} />} />
+          <Route path="/:username" element={<ProfilePage />} />
       </Routes>
+      </main>
       </>
   );
 }

@@ -78,7 +78,7 @@ export default function SignUpPage(props){
             placeholder="email"
             value={state.email}
             onChange={handleChange}
-
+            required
           />
           {/* password input */}
           <Form.Input 
