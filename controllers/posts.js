@@ -26,6 +26,8 @@ function create(req, res){
             photoUrl: data.Location,
             user: req.user
     });
+    // make sure post we send back has the user populated
+        await post.populate('user');
         res.status(201).json({ post: post });
     } catch (err) {
         res.status(400).json({ err });
@@ -38,7 +40,7 @@ async function index(req, res){
         // this populates the user when you find the posts
         // so you'll have access to the users information 
         // when you fetch teh posts
-        const posts = await Post.find({}).populate('user').exec()
+        const posts = await Post.find({}).sort({'createdAt': 'desc'}).populate('user').exec()
         res.status(200).json({posts})
     } catch(err){
 

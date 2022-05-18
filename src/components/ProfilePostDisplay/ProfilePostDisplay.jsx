@@ -1,9 +1,19 @@
 import React from "react";
-import { Card } from 'semantic-ui-react';
-import Post from "../PostCard/PostCard";
+import PostCard from "../PostCard/PostCard";
 
-export default function ProfilePostDisplay(props) {
+export default function ProfilePostDisplay({user, posts}) {
+    const postcards = Object.keys(posts).map((post) => {
+        return (
+        <PostCard 
+        post={posts[post]}
+        user={user}
+        />
+        )
+    })
+
     return (
-        <div>Profile Post Display Container</div>
+        <>
+        {postcards}
+        </>
     )
 }

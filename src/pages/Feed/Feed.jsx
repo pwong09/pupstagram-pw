@@ -5,6 +5,8 @@ import PostFeed from "../../components/PostFeed/PostFeed";
 import * as postsAPI from "../../utils/postApi";
 import * as likesAPI from "../../utils/likesApi";
 
+import {  Grid } from 'semantic-ui-react'
+
 export default function Feed(props) {
     const [posts, setPosts] = useState([]);
     
@@ -13,16 +15,12 @@ export default function Feed(props) {
             const data = await postsAPI.getAll();
             setPosts([...data.posts])
         } catch(err) {
-            console.log(err, ' this is the error')
+            console.log(err, ' this is an error from getPosts')
         }
     }
 
     useEffect(() => {
         getPosts()
-        // fetch from Post model - base url would be /api/posts
-        // call the index post controller
-        // which matches by req.user
-        // does controller return posts?
     }, []);
     // console.log("after useEffect", posts);
 
@@ -52,15 +50,27 @@ export default function Feed(props) {
     }
 
     return (
-        <>
-        <PageHeader />
-        <AddPost handleAddPost={handleAddPost} />
-        <PostFeed 
-            posts={posts} 
-            user={props.user}
-            addLike={addLike}
-            removeLike={removeLike}
-        />
-        </>
+        <Grid centered>
+            <Grid.Row>
+                <Grid.Column>
+                    <PageHeader user={props.user} />
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+                <Grid.Column style={{ maxWidth: 450}}>
+                    <AddPost handleAddPost={handleAddPost} />
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+                <Grid.Column style={{ maxWidth: 450 }}>
+                    <PostFeed 
+                        posts={posts} 
+                        user={props.user}
+                        addLike={addLike}
+                        removeLike={removeLike}
+                    />
+                </Grid.Column>
+            </Grid.Row>
+        </Grid>
     )
 }
