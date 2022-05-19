@@ -5,7 +5,8 @@ import { Grid } from 'semantic-ui-react';
 import ProfileBio from "../../components/ProfileBio/ProfileBio";
 import PostFeed from "../../components/PostFeed/PostFeed";
 import PageHeader from "../../components/Header/Header";
-import * as postsAPI from "../../utils/postApi";
+import Loading from "../../components/Loader/Loader";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 export default function ProfilePage(){
     const { username } = useParams();
@@ -30,32 +31,25 @@ export default function ProfilePage(){
         }
     }
 
-    async function getPosts() {
-        try {
-            const data = await postsAPI.getAll();
-            setPosts([...data.posts])
-        } catch(err) {
-            console.log(err, ' this is an error from getPosts')
-        }
-    }
-
     useEffect(() => {
         getProfile();
-        getPosts();
     }, []);
 
     if (error) {
         return (
             <>
-                <PageHeader user={user} />
-                <h1>{error}</h1>
+                <PageHeader />
+                <ErrorMessage error={error}/>
             </>
         )
     }
 
     if (loading) {
         return (
-            <h1>Loading...</h1>
+            <>
+                <PageHeader />
+                <Loading />
+            </>
         )
     }
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import PostCard from "../../components/PostCard/PostCard";
-import {Card} from 'semantic-ui-react';
+import Loading from "../Loader/Loader";
+import {Card, Segment, Dimmer, Image} from 'semantic-ui-react';
 
-export default function PostFeed({posts, numPhotosCol, isProfile, addLike, removeLike}){
+export default function PostFeed({posts, numPhotosCol, isProfile, loading, addLike, removeLike}){
     console.log("PostFeed's", posts)
     const postcards = Object.keys(posts).map((post) => {
         return (
@@ -19,6 +20,16 @@ export default function PostFeed({posts, numPhotosCol, isProfile, addLike, remov
     console.log(postcards)
     return (
         <Card.Group itemsPerRow={numPhotosCol} stackable>
+        {loading ? (
+            <Segment>
+                <Dimmer active inverted>
+                    <Loading size="small">
+                        Loading
+                    </Loading>
+                </Dimmer>
+                <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
+            </Segment>
+        ) : null}
         {postcards}
         </Card.Group>
     )
