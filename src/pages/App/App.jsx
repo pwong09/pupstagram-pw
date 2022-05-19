@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import { Route, Routes, Link } from 'react-router-dom';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+// import './App.css';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
+import PageHeader from "../../components/Header/Header";
 import userService from "../../utils/userService";
 import Feed from "../Feed/Feed";
 import ProfilePage from "../ProfilePage/ProfilePage";
@@ -16,16 +17,28 @@ function App() {
   }
 
   return (
-    <>
-      <main>
+    <div className="app">
+      {user ? 
+      <>
+      <PageHeader user={user} />
       <Routes>
-          <Route path='/' element={<Feed user={user}/>} />
-          <Route path="/login" element={<LoginPage handleSignupOrLogin={handleSignupOrLogin} />} />
-          <Route exact path="/signup" element={<SignupPage handleSignupOrLogin={handleSignupOrLogin} />} />
-          <Route path="/:username" element={<ProfilePage />} />
+          <Route path='/' element={<Feed user={user} />} />
+          <Route path="/:username" element={<ProfilePage user={user} />} />
+          <Route path="/signup" element={<SignupPage handleSignupOrLogin={handleSignupOrLogin} />} />
+          <Route path="/login" element={<LoginPage handleSignupOrLogin={handleSignupOrLogin}/>} />
       </Routes>
-      </main>
       </>
+      : 
+      <>
+        <PageHeader />
+        <Routes>
+          <Route path="/" element={<LoginPage handleSignupOrLogin={handleSignupOrLogin}/>} />
+          <Route path="/signup" element={<SignupPage handleSignupOrLogin={handleSignupOrLogin} />} />
+          <Route path="/login" element={<LoginPage handleSignupOrLogin={handleSignupOrLogin}/>} />
+        </Routes>
+      </>
+      }
+    </div>
   );
 }
 

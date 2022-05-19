@@ -38,7 +38,6 @@ export default function ProfilePage(){
     if (error) {
         return (
             <>
-                <PageHeader />
                 <ErrorMessage error={error}/>
             </>
         )
@@ -47,7 +46,6 @@ export default function ProfilePage(){
     if (loading) {
         return (
             <>
-                <PageHeader />
                 <Loading />
             </>
         )
@@ -55,11 +53,6 @@ export default function ProfilePage(){
 
     return (
         <Grid>
-            <Grid.Row>
-                <Grid.Column>
-                    <PageHeader user={user} />
-                </Grid.Column>
-            </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
                     <ProfileBio user={user} />

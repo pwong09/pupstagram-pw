@@ -17,7 +17,6 @@ export default function PostFeed({posts, numPhotosCol, isProfile, loading, addLi
         />
         )
     })
-    console.log(postcards)
     return (
         <Card.Group itemsPerRow={numPhotosCol} stackable>
         {loading ? (

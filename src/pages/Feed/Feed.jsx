@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PageHeader from "../../components/Header/Header";
 import AddPost from "../../components/AddPostForm/AddPostForm";
 import PostFeed from "../../components/PostFeed/PostFeed";
 import Loading from "../../components/Loader/Loader";
@@ -67,7 +66,6 @@ export default function Feed(props) {
     if (error) {
         return (
             <>
-                <PageHeader />
                 <ErrorMessage error={error} />
             </>
         )
@@ -76,19 +74,13 @@ export default function Feed(props) {
     if (loading) {
         return (
             <>
-                <PageHeader />
-                <ErrorMessage error={error} />
+                <Loading />
             </>
         )
     }
 
     return (
         <Grid centered>
-            <Grid.Row>
-                <Grid.Column>
-                    <PageHeader user={props.user} />
-                </Grid.Column>
-            </Grid.Row>
             <Grid.Row>
                 <Grid.Column style={{ maxWidth: 450}}>
                     <AddPost handleAddPost={handleAddPost} />
