@@ -3,17 +3,17 @@ import userService from '../../utils/userService';
 import {useParams} from "react-router-dom";
 import { Grid } from 'semantic-ui-react';
 import ProfileBio from "../../components/ProfileBio/ProfileBio";
-import ProfilePostDisplay from "../../components/ProfilePostDisplay/ProfilePostDisplay";
+import PostFeed from "../../components/PostFeed/PostFeed";
 import PageHeader from "../../components/Header/Header";
 import * as postsAPI from "../../utils/postApi";
 
 export default function ProfilePage(){
+    const { username } = useParams();
+    
     const [posts, setPosts] = useState([]);
     const [user, setProfileUser] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-
-    const { username } = useParams();
 
     async function getProfile() {
         try {
@@ -73,7 +73,11 @@ export default function ProfilePage(){
             </Grid.Row>
             <Grid.Row centered>
                 <Grid.Column style={{ maxWidth: 750 }}>
-                    <ProfilePostDisplay user={user} posts={posts} />
+                    <PostFeed 
+                        isProfile={true}
+                        posts={posts}
+                        numPhotosCol={3}
+                    />
                 </Grid.Column>
             </Grid.Row>
         </Grid>

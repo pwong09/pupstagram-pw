@@ -65,7 +65,8 @@ export default function Feed(props) {
                 <Grid.Column style={{ maxWidth: 450 }}>
                     <PostFeed 
                         posts={posts} 
-                        user={props.user}
+                        numPhotosCol={1}
+                        isProfile={false}
                         addLike={addLike}
                         removeLike={removeLike}
                     />
